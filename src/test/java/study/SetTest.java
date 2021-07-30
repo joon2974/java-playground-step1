@@ -11,7 +11,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class SetTest {
     private Set<Integer> numbers;
@@ -38,7 +37,7 @@ public class SetTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiter = ':')
+    @CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiter = ':') // String만
     void contain_2(String input, String expected) {
         int realInput = Integer.parseInt(input);
         boolean realExpected = Boolean.parseBoolean(expected);
