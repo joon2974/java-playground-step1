@@ -4,9 +4,13 @@ import java.util.*;
 
 public class BaseballGame {
 
+    private InputView inputView;
+    private OutputView outputView;
+
     public BaseballGame() {}
 
     public void start() {
+        initView();
         int isContinue = 1;
 
         while(isContinue != 2) {
@@ -14,6 +18,11 @@ public class BaseballGame {
             startGame(answer);
             isContinue = getUserContinue();
         }
+    }
+
+    public void initView() {
+        inputView = new InputView();
+        outputView = new OutputView();
     }
 
     public String generateAnswer() {
@@ -37,15 +46,13 @@ public class BaseballGame {
             strikes = getStrikes(input, answer);
             balls = getBalls(input, answer);
 
-            System.out.println(getResultString(balls, strikes));
+            outputView.showAnnounce(getResultString(balls, strikes));
         }
-        System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        outputView.showAnnounce("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     }
 
     public String getUserInput() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("숫자를 입력해 주세요: ");
-        return scanner.nextLine();
+        return inputView.getUserInputLine("숫자를 입력해 주세요: ");
     }
 
     public Integer getStrikes(String input, String answer) {
@@ -96,8 +103,6 @@ public class BaseballGame {
     }
 
     public Integer getUserContinue() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
-        return scanner.nextInt();
+        return inputView.getUserInputInteger("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
     }
 }

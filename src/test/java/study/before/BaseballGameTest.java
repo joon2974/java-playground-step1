@@ -37,6 +37,8 @@ public class BaseballGameTest {
     @CsvSource(value = {"123:123", "234:234", "132:132"}, delimiter = ':')
     void test_getUserInput(String userInput, String userInputCheck) {
         // given
+        baseballGame.initView();
+
         OutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
         InputStream in = new ByteArrayInputStream(userInput.getBytes());
