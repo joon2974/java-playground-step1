@@ -1,5 +1,7 @@
 package baseball;
 
+import com.sun.jdi.request.InvalidRequestStateException;
+
 import java.util.List;
 
 public class Game {
@@ -30,6 +32,9 @@ public class Game {
 
         while (isNotFinished) {
             Integer userInput = InputView.getIntegerUserInput("숫자를 입력해 주세요: ");
+
+            if (isNotValid(userInput)) continue;
+
             Balls userBalls = new Balls(userInput);
 
             OutputView.showOutputAnnounce(announce(this.computer.play(userBalls)));
@@ -37,6 +42,17 @@ public class Game {
         }
 
         OutputView.showOutputAnnounce("3개의 숫자를 모두 맞추셨습니다! 게임 종료");
+    }
+
+    private boolean isNotValid (Integer userInput) {
+        try {
+            InputValidator.validate(userInput);
+        } catch (InvalidRequestStateException e) {
+            OutputView.showOutputAnnounce(e.getLocalizedMessage());
+            return true;
+        }
+
+        return false;
     }
 
     public String announce(List<Judge> judges) {
