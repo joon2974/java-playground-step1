@@ -42,4 +42,14 @@ public class Computer {
         this.answerBalls = new Balls(ballNums);
     }
 
+    public List<Judge> play(Balls userBalls) {
+        List<Judge> result = new ArrayList<>();
+
+        for(Ball userBall: userBalls.getBalls()) {
+            result.add(this.answerBalls.play(userBall));
+        }
+
+        return result;
+    }
+
 }

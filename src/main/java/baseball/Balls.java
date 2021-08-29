@@ -7,8 +7,24 @@ public class Balls {
 
     private List<Ball> balls;
 
+    public List<Ball> getBalls() {
+        return balls;
+    }
+
     public Balls(List<Integer> ballNums) {
        init(ballNums);
+    }
+
+    public Balls(Integer userInput) {
+        List<Integer> userNums = new ArrayList<>();
+
+        Integer target = userInput;
+        for (int i = 0; i < 3; i ++) {
+            userNums.add(target % 10);
+            target /= 10;
+        }
+
+        init(userNums);
     }
 
     private void init(List<Integer> ballNums) {
